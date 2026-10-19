@@ -22,10 +22,16 @@ class Truco:
        Baraja el mazo completo.
       """
       random.shuffle(self.cartas)
+
    
    def repartir(self):
-      players = self._kargs['n_players']
-      pass
+      self.barajar()
+      indice = 0
+      for jugador in self.players:
+         jugador['cartas'] = []
+         for _ in range(3):
+            jugador['cartas'].append(self.cartas[indice])
+            indice += 1
 
    def __init__(self, **kargs):
 
