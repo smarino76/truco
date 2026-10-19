@@ -17,6 +17,13 @@
 
 import random
 class Truco:
+   
+   ALLOWED_PARAMS = {
+        'n_players',
+        'players',
+        'puntos_maximos'
+   }
+   
    def barajar(self):
       """
        Baraja el mazo completo.
@@ -33,9 +40,18 @@ class Truco:
             jugador['cartas'].append(self.cartas[indice])
             indice += 1
 
-   def __init__(self, **kargs):
 
-        self._kargs = kargs
+    def __init__(self, **kwargs):
+
+        invalid = set(kwargs) - self.ALLOWED_PARAMS
+
+        if invalid:
+            raise ValueError(
+                f"Parámetros no permitidos: {', '.join(invalid)}"
+            )
+
+        self._kwargs = kwargs
+       
         self.cartas = [
             {'name': 'ancho de espadas', 'value': 14},
             {'name': 'dos de espadas', 'value': 9},
